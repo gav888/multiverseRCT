@@ -1,7 +1,7 @@
 ---
 bibliography: references.bib
 ---
-# multiverseRCT <img src="man/figures/logo.png" align="left" height="160" style="margin-right: 20px;" />
+# multiverseRCT <img src="man/figures/logo.png" align="left" height="150" style="margin-right: 20px;" />
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/gav888/multiverseRCT/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gav888/multiverseRCT/actions/workflows/R-CMD-check.yaml)
