@@ -1,27 +1,23 @@
 ---
 bibliography: references.bib
 ---
-
-
-# multiverseRCT # multiverseRCT <img src="man/figures/logo.png" align="right" height="139" />
+# multiverseRCT <img src="man/figures/logo.png" align="left" height="200" style="margin-right: 20px;" />
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/yourusername/multiverseRCT/workflows/R-CMD-check/badge.svg)](https://github.com/yourusername/multiverseRCT/actions)
+[![R-CMD-check](https://github.com/gav888/multiverseRCT/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/gav888/multiverseRCT/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
 
+## Overview
 
-***multiverseRCT*** is an R package for conducting multiverse analyses on randomized controlled trial (RCT) data. Instead of making a single set of analytical choices, multiverse analysis explores how different preprocessing decisions and model specifications affect research conclusions.
+**multiverseRCT** is an R package for conducting multiverse analyses on randomized controlled trial (RCT) data. Instead of making a single set of analytical choices, multiverse analysis explores how different preprocessing decisions and model specifications affect research conclusions.
 
 The package lets you:
 
--   Apply multiple preprocessing methods (e.g., different imputation strategies, outlier handling)
-
--   Fit multiple model specifications (adjusted/unadjusted, different model families)
-
--   Visualize the variation in treatment effects across the multiverse
-
--   Quantify the sensitivity of conclusions to analytic decisions
+* Apply multiple preprocessing methods (e.g., different imputation strategies, outlier handling)
+* Fit multiple model specifications (adjusted/unadjusted, different model families)
+* Visualize the variation in treatment effects across the multiverse
+* Quantify the sensitivity of conclusions to analytic decisions
 
 ## Installation
 
