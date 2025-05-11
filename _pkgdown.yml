@@ -1,0 +1,42 @@
+url: https://yourusername.github.io/multiverseRCT/
+
+template:
+  bootstrap: 5
+  bootswatch: flatly  # you can choose a theme: cerulean, cosmo, flatly, journal, lumen, etc.
+
+navbar:
+  structure:
+    left:  [home, intro, reference, articles, tutorials, news]
+    right: [github]
+  components:
+    home:
+      icon: fas fa-home fa-lg
+      href: index.html
+    reference:
+      text: Functions
+      href: reference/index.html
+    github:
+      icon: fab fa-github fa-lg
+      href: https://github.com/gav888/multiverseRCT
+
+reference:
+  - title: "Core Functions"
+    desc: "Main functions for multiverse analysis"
+    contents:
+      - multiverse_rct
+      - sensitivity_analysis
+      - filter_multiverse
+      - extract_models
+  - title: "Plotting Functions"
+    desc: "Visualize multiverse results"
+    contents:
+      - plot.multiverse_rct
+  - title: "Helper Functions"
+    desc: "Default models and preprocessing"
+    contents:
+      - starts_with("defaults_")
+      - winsorize
+      - mean_impute
+      - median_impute
+      - mode_impute
+      - remove_outliers

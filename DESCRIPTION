@@ -1,13 +1,35 @@
 Package: multiverseRCT
 Title: A Toolkit for Multiverse Analyses in Randomised Controlled Trials
-Version: 0.0.0.9000
-Authors@R: person("Giuseppe", "Veltri",
-                  email = "gaveltri@nus.edu.sg",
-                  role  = c("aut", "cre"))
+Version: 0.0.1
+Authors@R: person(given = "Giuseppe A.", family = "Veltri", email = "g.a.veltri@proton.me", role = c("aut", "cre"))
 Description: Functions to specify, run and summarise multiverse analyses
-    for behavioural RCTs. Supports batch simulation, tidy summaries, and
+    for behavioural RCTs. Supports batch execution, tidy summaries and
     publication-ready graphics.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
+Imports:
+    dplyr,
+    tidyr,
+    ggplot2,
+    cli,
+    rlang,
+    tibble,
+    purrr,
+    future.apply,
+    gbm,
+    mgcv,
+    stats
+Suggests:
+    MASS,
+    future,
+    parallel,
+    testthat (>= 3.0.0),
+    knitr,
+    rmarkdown
+Config/testthat/edition: 3
+LazyData: true
+Depends: 
+    R (>= 3.5.0)
+VignetteBuilder: knitr
