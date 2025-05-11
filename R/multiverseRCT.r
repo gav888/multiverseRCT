@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------
 #  multiverseRCT  –  Multiverse analyses for behavioural RCT data
-#  (ENHANCED VERSION WITH IMPROVEMENTS)
+#
 # ------------------------------------------------------------------
 #  Save this file as  R/multiverseRCT.R
 # ------------------------------------------------------------------
@@ -413,6 +413,7 @@ plot.multiverse_rct <- function(x,
                                          "heatmap", "forest", "significance"),
                                 signif_level = 0.05,
                                 sort_by = c("estimate", "p.value", "preprocessing", "model"),
+                                ci_level = 0.95,
                                 ...) {
   type <- match.arg(type)
   sort_by <- match.arg(sort_by)
@@ -436,33 +437,45 @@ plot.multiverse_rct <- function(x,
   }
 
   if (type == "spec_curve") {
-    # Specification curve with optional confidence intervals
-    p <- ggplot2::ggplot(df,
-                         ggplot2::aes(x = reorder(decision, sort_var),
-                                      y = estimate)) +
-      ggplot2::geom_point(ggplot2::aes(shape = .model_name,
-                                       color = significant)) +
-      ggplot2::scale_color_manual(values = c("TRUE" = "red", "FALSE" = "black")) +
-      ggplot2::coord_flip() +
-      ggplot2::theme_minimal() +
-      ggplot2::theme(legend.position = "bottom") +
-      ggplot2::labs(x = "Analytic Decision",
-                    y = "Estimated Treatment Effect",
-                    shape = "Model",
-                    color = "p < 0.05",
-                    title = "Specification Curve") +
-      ggplot2::geom_hline(yintercept = 0, linetype = "dashed")
-
-    # Add confidence intervals if standard errors available
-    if (!all(is.na(df$std.error))) {
-      df$lower <- df$estimate - 1.96 * df$std.error
-      df$upper <- df$estimate + 1.96 * df$std.error
-      p <- p + ggplot2::geom_errorbarh(ggplot2::aes(xmin = lower, xmax = upper),
-                                       height = 0.2, alpha = 0.5)
+    # Compute analytic confidence intervals at user-specified level
+    if ("std.error" %in% names(df) && !all(is.na(df$std.error))) {
+      mult <- stats::qnorm(1 - (1 - ci_level) / 2)
+      df$lower <- df$estimate - mult * df$std.error
+      df$upper <- df$estimate + mult * df$std.error
     }
 
-    return(p)
+    p <- ggplot2::ggplot(df, ggplot2::aes(x = reorder(decision, sort_var),
+                                          y = estimate)) +
+      ggplot2::geom_hline(yintercept = 0, linetype = "dashed") +
+      ggplot2::geom_errorbar(
+        ggplot2::aes(ymin = lower, ymax = upper),
+        width = 0.2, alpha = 0.6
+      ) +
+      ggplot2::geom_point(
+        ggplot2::aes(shape = .model_name, color = significant),
+        size = 3
+      ) +
+      ggplot2::scale_color_manual(
+        values = c("TRUE" = "red", "FALSE" = "black"),
+        name   = "Significance",
+        labels = c("TRUE" = "p < 0.05", "FALSE" = "Not significant")
+      ) +
+      ggplot2::scale_shape_discrete(name = "Model") +
+      ggplot2::coord_flip() +
+      ggplot2::theme_minimal() +
+      ggplot2::theme(
+        legend.position  = "bottom",
+        panel.grid.minor = element_blank(),
+        axis.text.y      = element_text(size = 8)
+      ) +
+      ggplot2::labs(
+        x        = "Analytic Decision",
+        y        = "Estimated Treatment Effect",
+        title    = "Specification Curve",
+        subtitle = sprintf("%.0f%% CI", ci_level * 100)
+      )
 
+    return(p)
   } else if (type == "distribution") {
     # Distribution of effects by model type
     ggplot2::ggplot(df,
