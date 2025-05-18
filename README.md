@@ -100,7 +100,7 @@ plot(mv_custom, type = "heatmap")
 ## Background and Resources
 
 Multiverse analysis addresses the issue of analytical flexibility in research by exploring how findings depend on reasonable analysis choices. Rather than choosing a single path through the garden of forking paths, multiverse analysis examines many paths simultaneously.\
-\
+
 
 ## Licence
 
